@@ -1,5 +1,7 @@
 import './App.css';
 import Card from './components/Card.jsx';
+import Form from './components/Form.jsx';
+import Header from './components/Header.jsx';
 import HistoryItem from './components/HistoryItem.jsx';
 
 function App() {
@@ -20,21 +22,14 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <h1>Budget App</h1>
-
-        <div className="statistics">
-          <h3>Your Balance:</h3>
-          <p>2550.53</p>
-        </div>
-
+        <Header content={'Budget App'} type={'h1'}/>
+        <Card el={{title:'Your Balance',price:'2550.53',style:'black'}} />
         <section className="cards">
           {cardData?.map((el) => {
             return <Card el={el} />;
           })}
         </section>
-
-        <h2>History</h2>
-
+        <Header content={'History'} type={'h2'}/>
         <section className="historyItems">
           <HistoryItem />
           <HistoryItem />
@@ -42,25 +37,8 @@ function App() {
           <HistoryItem />
           <HistoryItem />
         </section>
-
-        <h2>Add New Transaction</h2>
-        <form>
-          <div className='inputs'>
-            <div className='form--col'>
-              <label>Description</label>
-              <input placeholder="Description" />
-            </div>
-
-            <div className='form--col'>
-              <label>Value</label>
-              <input type="number" />
-            </div>
-          </div>
-          <div className='buttons'>
-            <button>Cancel</button>
-            <button>OK</button>
-          </div>
-        </form>
+        <Header content={'Add a new Transaction'} type={'h2'}/>
+        <Form/>
       </div>
     </div>
   );
