@@ -1,0 +1,81 @@
+.card{
+  text-transform: uppercase;
+  width: 25%;
+  background-color: aliceblue;
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  
+}
+
+
+.cards{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.historyItem {
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: aliceblue;
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+
+}
+
+.historyItem .icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.historyItem .icons .buttons{
+  margin-left: 1rem;
+}
+
+
+.historyItem .icons .buttons button{
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+  cursor: pointer;
+}
+
+.form--col{
+  display: flex;
+  flex-direction: column;  
+  width: 15%;
+}
+
+.form--col input{
+  width: 95%;
+  font-size: 1rem;
+}
+
+.inputs{
+  display: flex;
+  /* justify-content: center; */
+}
+
+.buttons{
+  margin-top: 3px;
+}
+
+.buttons button{
+  margin-left: 3px;
+  margin-right: 3px;
+  cursor: pointer;
+}
+
+form{
+  margin-bottom: 2rem;
+}
