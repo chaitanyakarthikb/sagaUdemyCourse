@@ -1,21 +1,10 @@
-.card{
-  text-transform: uppercase;
-  width: 25%;
-  background-color: aliceblue;
+/* ============================================MAIN HEADER=================================== */
+.mainHeader {
   text-align: center;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  
+  text-decoration: underline;
 }
 
-
-.cards{
-  display: flex;
-  justify-content: space-evenly;
-}
+/* ============================================HISTORY ITEMS=================================== */
 
 .historyItem {
   display: flex;
@@ -29,8 +18,6 @@
   border-radius: 5px;
   margin-top: 1rem;
   margin-bottom: 1rem;
-
-
 }
 
 .historyItem .icons {
@@ -39,43 +26,79 @@
   align-items: center;
 }
 
-.historyItem .icons .buttons{
+.historyItem .icons .buttons {
   margin-left: 1rem;
 }
 
-
-.historyItem .icons .buttons button{
+.historyItem .icons .buttons button {
   margin-left: 0.3rem;
   margin-right: 0.3rem;
   cursor: pointer;
 }
 
-.form--col{
-  display: flex;
-  flex-direction: column;  
-  width: 15%;
+/* ============================================CARD=================================== */
+
+.card {
+  text-transform: uppercase;
+  width: 25%;
+  background-color: aliceblue;
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-.form--col input{
+.cards {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* ============================================FORM=================================== */
+
+form {
+  margin-bottom: 2rem;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form--col {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form--col input {
   width: 95%;
   font-size: 1rem;
 }
 
-.inputs{
+.inputs {
   display: flex;
-  /* justify-content: center; */
+  /* justify-content: space-around; */
 }
 
-.buttons{
+.buttons {
   margin-top: 3px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5rem;
 }
 
-.buttons button{
+.buttons button {
   margin-left: 3px;
   margin-right: 3px;
   cursor: pointer;
-}
-
-form{
-  margin-bottom: 2rem;
+  width: 50%;
 }
