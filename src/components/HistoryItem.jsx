@@ -1,17 +1,26 @@
 import React from "react";
-import { FaEdit } from "react-icons/fa";
-import { FaTrashAlt } from "react-icons/fa";
-import { FaRegTrashCan } from "react-icons/fa6";
 
-const HistoryItem = () => {
+const HistoryItem = ({
+  description,
+  isExpense,
+  value,
+  handleDeleteItem,
+  id,
+  setShowModal,
+  setIdForModalToShow,
+}) => {
+  const handleEdit = () => {
+    setIdForModalToShow(id);
+    setShowModal((prev) => !prev);
+  };
   return (
-    <div className="historyItem">
-      <h2>Something</h2>
+    <div className={`historyItem ${isExpense ? "red" : "green"}`}>
+      <h2>{description}</h2>
       <div className="icons">
-        <p>$100.00</p>
+        <p>${value}</p>
         <div className="buttons">
-          <button>Edit</button>
-          <button>Delete</button>
+          <button onClick={() => handleEdit()}>Edit</button>
+          <button onClick={() => handleDeleteItem(id)}>Delete</button>
         </div>
       </div>
     </div>
