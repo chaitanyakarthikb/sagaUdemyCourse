@@ -7,13 +7,16 @@ const UserEntryHooks = (element) => {
   const [value, setValue] = useState(element ? element.value : "");
   const [expense, setExpense] = useState(element ? element.isExpense : false);
   const dispatch = useDispatch();
+  const resetValues = ()=>{
+    setDescription("");
+    setValue("");
+    setExpense(false);
+  }  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (element) {
       dispatch(editEntryRedux({id:element.id,description:description,value:value,isExpense:expense}));
-      setDescription("");
-      setValue("");
-      setExpense(false);
+      resetValues();
       return;
     }
     if (value.length > 0 && description.length > 0) {
@@ -26,9 +29,7 @@ const UserEntryHooks = (element) => {
         isExpense: expense,
       };
       dispatch(addEntryRedux(obj));
-      setDescription("");
-      setValue("");
-      setExpense(false);
+      resetValues();
     }
   };
   return {
