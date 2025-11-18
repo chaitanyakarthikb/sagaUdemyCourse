@@ -44,8 +44,20 @@ export const entriesReducer = (state = initialEntries, action) => {
       newEntries = [...state, { ...action.payload }];
       return newEntries;
     case "REMOVE_ENTRY":
-      newEntries = state.filter((el) => el.id !== action.payload.id);
+      newEntries = state.filter((el) => el.id !== action.payload);
       return newEntries;
+    case "EDIT_ENTRY_REDUX":
+      return state.map((el) => {
+        if (el.id === action.payload.id) {
+          return {
+            ...el, 
+            description: action.payload.description,
+            isExpense: action.payload.isExpense,
+            value: action.payload.value,
+          };
+        }
+        return el; 
+      });
     default:
       return state;
   }

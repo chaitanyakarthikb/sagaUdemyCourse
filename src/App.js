@@ -7,8 +7,7 @@ import HistoryItems from "./components/HistoryItems.jsx";
 import Cards from "./components/Cards.jsx";
 import Modal from "./components/Modal.jsx";
 import { store } from "./Store/store.js";
-import { removeEntryRedux } from "./Actions/actions.js";
-
+import { useSelector } from "react-redux";
 
 export const payload_add = {
   id: crypto.randomUUID(),
@@ -28,13 +27,9 @@ function App() {
     );
   });
 
-  // store.dispatch(addEntryRedux(payload_add));
-  store.dispatch(removeEntryRedux(payload_remove));
+  const entries = useSelector((state) => state.entries);
+  const modalShowUp = useSelector((state) => state.modals.isModalOpened);
 
-  const [items, setItems] = useState(store.getState().entries);
-  
-  const [showModal, setShowModal] = useState(false);
-  const [idForModalToShow, setIdForModalToShow] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
@@ -54,33 +49,8 @@ function App() {
     },
   ];
 
-  const handleDeleteItem = (id) => {
-    store.dispatch(removeEntryRedux({id}))
-    setItems(store.getState().entries);
-  };
-
-  const addItem = (item) => {
-    setItems((prev) => [...prev, item]);
-  };
-
-  const element = items.find((el) => el.id === idForModalToShow);
-
-  const editEntries = (el) => {
-    console.log("hello world , I am inside my editEntries function");
-    let temp = items.map((entry) => {
-      if (entry.id === el.id) {
-        entry.description = el.description;
-        entry.isExpense = el.isExpense;
-        entry.value = el.value;
-        return entry;
-      }
-      return entry;
-    });
-    setItems(temp);
-    setShowModal(false);
-  };
   useEffect(() => {
-    if (items.length === 0) {
+    if (entries.length === 0) {
       setExpenses(0);
       setIncome(0);
       setTotalPrice(0);
@@ -90,7 +60,7 @@ function App() {
     let totalIncome = 0;
     let totalExpenses = 0;
 
-    items.forEach((el) => {
+    entries.forEach((el) => {
       if (el.isExpense) {
         totalExpenses = totalExpenses + el.value;
       } else {
@@ -102,7 +72,7 @@ function App() {
       totalAmount = totalIncome - totalExpenses;
       setTotalPrice(totalAmount);
     });
-  }, [items]);
+  }, [entries]);
 
   return (
     <div className="App">
@@ -113,21 +83,10 @@ function App() {
         />
         <Cards cardData={cardData} />
         <Header content={"History"} type={"h2"} />
-        <HistoryItems
-          setIdForModalToShow={setIdForModalToShow}
-          setShowModal={setShowModal}
-          handleDeleteItem={handleDeleteItem}
-          items={items}
-        />
-        {showModal && (
-          <Modal
-            editEntries={editEntries}
-            element={element}
-            setShowModal={setShowModal}
-          />
-        )}
+        <HistoryItems />
+        {modalShowUp && <Modal />}
         <Header content={"Add a new Transaction"} type={"h2"} />
-        <Form addItem={addItem} />
+        <Form />
       </div>
     </div>
   );
