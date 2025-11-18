@@ -1,12 +1,9 @@
 import React from "react";
 import HistoryItem from "./HistoryItem";
+import { useSelector } from "react-redux";
 
-const HistoryItems = ({
-  items,
-  handleDeleteItem,
-  setShowModal,
-  setIdForModalToShow,
-}) => {
+const HistoryItems = ({ handleDeleteItem }) => {
+  const items = useSelector((state) => state.entries);
   return (
     <>
       <section className="historyItems">
@@ -19,8 +16,6 @@ const HistoryItems = ({
               value={el.value}
               id={el.id}
               handleDeleteItem={handleDeleteItem}
-              setShowModal={setShowModal}
-              setIdForModalToShow={setIdForModalToShow}
             />
           );
         })}

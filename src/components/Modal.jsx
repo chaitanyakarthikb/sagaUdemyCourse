@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import { styled } from "styled-components";
+import UserEntryHooks from "../Hooks/UserEntryHooks";
+import FormElement from "./FormElement";
 
 const Wrapper = styled.div`
   .overlay {
@@ -23,62 +26,36 @@ const Wrapper = styled.div`
     align-items: center;
   }
 `;
-const Modal = ({ setShowModal, element, editEntries }) => {
-  console.log("===========element=========", element);
-  const [description, setDescription] = useState(element.description);
-  const [value, setValue] = useState(element.value);
-  const [expense, setExpense] = useState(element.isExpense);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let obj = {
-      description: description,
-      value: value,
-      isExpense: expense,
-      id: element.id,
-    };
-    editEntries(obj);
+const Modal = () => {
+  const entries = useSelector((state) => state.entries);
+  const idForModalToShow = useSelector(
+    (state) => state.modals.idForModalToShow
+  );
+  const element = entries.find((el) => el.id === idForModalToShow);
+
+  const {
+    description,
+    setDescription,
+    value,
+    setValue,
+    expense,
+    setExpense,
+    handleSubmit,
+  } = UserEntryHooks(element);
+  const propsToPass = {
+    description,
+    setDescription,
+    value,
+    setValue,
+    expense,
+    setExpense,
+    handleSubmit,
   };
   return (
     <Wrapper>
       <div className="overlay">
         <div className="modal">
-          <form>
-            <div className="inputs">
-              <div className="form--col">
-                <label>Description</label>
-                <input
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Description"
-                />
-              </div>
-
-              <div className="form--col">
-                <label>Value</label>
-                <input
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  type="number"
-                />
-                <div className="form--col--radio">
-                  <label class="switch">
-                    <input
-                      onChange={() => setExpense(!expense)}
-                      type="checkbox"
-                      checked={expense}
-                    />
-                    <span class="slider round"></span>
-                  </label>
-                  <p>Is Expense</p>
-                </div>
-              </div>
-            </div>
-            <div className="buttons">
-              <button>Cancel</button>
-              <button onClick={(e) => handleSubmit(e)}>OK</button>
-            </div>
-          </form>
-          <button onClick={() => setShowModal((prev) => !prev)}>Close</button>
+          <FormElement {...propsToPass} />
         </div>
       </div>
     </Wrapper>
