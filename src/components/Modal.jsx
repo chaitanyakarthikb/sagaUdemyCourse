@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   }
 `;
 const Modal = () => {
-  const entries = useSelector((state) => state.entries);
+  const entries = useSelector((state) => state.entries.entries);
   const idForModalToShow = useSelector(
     (state) => state.modals.idForModalToShow
   );
