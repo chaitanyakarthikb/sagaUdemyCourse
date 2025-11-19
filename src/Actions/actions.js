@@ -6,7 +6,6 @@ export const addEntryRedux = (payload) => {
 };
 
 export const removeEntryRedux = (payload) => {
-  console.log("============removeEntryReduxaction============")
   return {
     type: "REMOVE_ENTRY",
     payload,

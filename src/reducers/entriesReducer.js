@@ -1,53 +1,28 @@
-const initialEntries = [
-    {
-      id: 1,
-      description: "This is my First entry",
-      isExpense: true,
-      value: 1234,
-    },
-    {
-      id: 2,
-      description: "This is my Second entry",
-      isExpense: true,
-      value: 665,
-    },
-    {
-      id: 3,
-      description: "This is my Third entry",
-      isExpense: false,
-      value: 872.9,
-    },
-    {
-      id: 4,
-      description: "This is my Fourth entry",
-      isExpense: false,
-      value: 982,
-    },
-    {
-      id: 5,
-      description: "This is my Sixth entry",
-      isExpense: true,
-      value: 237.8,
-    },
-    {
-      id: 6,
-      description: "This is my Seventh entry",
-      isExpense: false,
-      value: 789.63,
-    },
-  ];
+import { ADD_ENTRY, EDIT_ENTRY_REDUX, ERR_SETTING_ENTRIES, REMOVE_ENTRY, SET_ENTRIES } from "../constants/constants";
+
+const initialState = {
+  entries:[],
+  isError:false,
+  isLoading:true,
+}
   
-export const entriesReducer = (state = initialEntries, action) => {
+export const entriesReducer = (state = initialState, action) => {
   let newEntries;
   switch (action.type) {
-    case "ADD_ENTRY":
-      newEntries = [...state, { ...action.payload }];
-      return newEntries;
-    case "REMOVE_ENTRY":
-      newEntries = state.filter((el) => el.id !== action.payload);
-      return newEntries;
-    case "EDIT_ENTRY_REDUX":
-      return state.map((el) => {
+    case ADD_ENTRY:
+      return{
+        ...state,
+        entries:[...state.entries,action.payload]
+      }
+    case REMOVE_ENTRY:
+      let temp = state.entries;
+      newEntries = temp.filter((el) => el.id !== action.payload);
+      return {
+        ...state,
+        entries:newEntries,
+      };
+    case EDIT_ENTRY_REDUX:
+      let editedEntries =  state.entries.map((el) => {
         if (el.id === action.payload.id) {
           return {
             ...el, 
@@ -58,6 +33,22 @@ export const entriesReducer = (state = initialEntries, action) => {
         }
         return el; 
       });
+      return {
+        ...state,
+        entries:editedEntries,
+      }
+    case SET_ENTRIES:
+      return{
+        ...state,
+        entries:action.payload,
+        isLoading:false,
+      }
+    case ERR_SETTING_ENTRIES:
+      return{
+        ...state,
+        isError:true,
+        isLoading:false,
+      }
     default:
       return state;
   }

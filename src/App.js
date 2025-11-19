@@ -7,7 +7,9 @@ import HistoryItems from "./components/HistoryItems.jsx";
 import Cards from "./components/Cards.jsx";
 import Modal from "./components/Modal.jsx";
 import { store } from "./Store/store.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { FETCH_ENTRIES } from "./constants/constants.js";
 
 export const payload_add = {
   id: crypto.randomUUID(),
@@ -20,20 +22,11 @@ export const payload_remove = {
   id: 1,
 };
 function App() {
-  store.subscribe(() => {
-    console.log(
-      "=========inside store.subscribe in which store's state has been changed===========",
-      store.getState()
-    );
-  });
-
-  const entries = useSelector((state) => state.entries);
+  const entries = useSelector((state) => state.entries.entries);
   const modalShowUp = useSelector((state) => state.modals.isModalOpened);
-
   const [totalPrice, setTotalPrice] = useState(0);
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
-
   const cardData = [
     {
       id: 1,
@@ -48,6 +41,11 @@ function App() {
       style: "red",
     },
   ];
+
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch({type:FETCH_ENTRIES});
+  },[])
 
   useEffect(() => {
     if (entries.length === 0) {

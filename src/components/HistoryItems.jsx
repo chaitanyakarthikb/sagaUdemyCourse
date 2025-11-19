@@ -3,10 +3,14 @@ import HistoryItem from "./HistoryItem";
 import { useSelector } from "react-redux";
 
 const HistoryItems = ({ handleDeleteItem }) => {
-  const items = useSelector((state) => state.entries);
+  const items = useSelector((state) => state?.entries?.entries);
   return (
     <>
       <section className="historyItems">
+        <div className="align-center">
+          {items.length === 0 && <p>No entries yet!!</p>}
+        </div>
+
         {items?.map((el) => {
           return (
             <HistoryItem
