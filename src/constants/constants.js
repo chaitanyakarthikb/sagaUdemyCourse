@@ -6,3 +6,4 @@ export const ERR_SETTING_ENTRIES = "ERR_SETTING_ENTRIES";
 export const EDIT_ENTRY_REDUX = "EDIT_ENTRY_REDUX";
 export const REMOVE_ENTRY = "REMOVE_ENTRY";
 export const ADD_ENTRY = "ADD_ENTRY";
+export const DELETE_ENTRY = "DELETE_ENTRY";

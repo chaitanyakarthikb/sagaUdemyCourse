@@ -1,12 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { removeEntryRedux } from "../Actions/actions";
-import { OPEN_EDIT_MODAL } from "../constants/constants";
+import { DELETE_ENTRY, OPEN_EDIT_MODAL } from "../constants/constants";
 
 const HistoryItem = ({ description, isExpense, value, id, setShowModal }) => {
   const handleEdit = () => {
     // setShowModal((prev) => !prev);
     dispatch({ type: OPEN_EDIT_MODAL, payload: id });
+  };
+
+  const handleDelete = () => {
+    // dispatch(removeEntryRedux(id));
+    dispatch({ type: DELETE_ENTRY, payload: id });
   };
   const dispatch = useDispatch();
   return (
@@ -16,7 +21,7 @@ const HistoryItem = ({ description, isExpense, value, id, setShowModal }) => {
         <p>${value}</p>
         <div className="buttons">
           <button onClick={() => handleEdit()}>Edit</button>
-          <button onClick={() => dispatch(removeEntryRedux(id))}>Delete</button>
+          <button onClick={() => handleDelete()}>Delete</button>
         </div>
       </div>
     </div>
